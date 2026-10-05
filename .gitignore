@@ -1,5 +1,6 @@
 # Local Pi runtime state
 .atl/
+odd/
 
 node_modules/
 dist/

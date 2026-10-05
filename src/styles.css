@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+  body { color: #031528; background: #fff; -webkit-font-smoothing: antialiased; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.001ms !important; animation-duration: 0.001ms !important; }
+  }
+}
+
+@layer utilities {
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .focus-ring { @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2; }
+}
+
+.property-card[hidden] { display: none; }
+.carousel-dot[aria-current="true"] { width: 1.5rem; background-color: #031528; }
+.mobile-menu[hidden], .empty-state[hidden] { display: none; }
+.modal-open { overflow: hidden; }
