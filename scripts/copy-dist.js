@@ -3,6 +3,8 @@ import { dirname } from 'node:path';
 
 const files = [
   ['index.html', 'dist/index.html'],
+  ['resultados.html', 'dist/resultados.html'],
+  ['contacto.html', 'dist/contacto.html'],
   ['README.md', 'dist/README.md'],
   ['.nojekyll', 'dist/.nojekyll'],
   ['assets', 'dist/assets'],

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grupo Rossello Inmobiliaria | Resultados de búsqueda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body class="font-sans text-brand-textMain bg-white antialiased">
+<header class="w-full bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm" data-purpose="main-header">
+  <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 min-h-20 flex items-center justify-between gap-2">
+    <a class="flex items-center gap-3 group min-w-0 focus-ring rounded" href="./index.html#inicio" title="Grupo Rossello Inmobiliaria">
+      <img alt="Grupo Rossello Inmobiliaria" class="h-12 sm:h-14 w-auto object-contain transition-transform duration-200 group-hover:scale-105" src="./assets/brand/logo-rossello.png">
+    </a>
+    <nav class="hidden md:flex items-center space-x-7 text-xs font-bold uppercase tracking-wider text-brand-navy" aria-label="Navegación principal">
+      <a class="hover:text-brand-red transition-colors focus-ring rounded" href="./index.html#inicio">INICIO</a>
+      <a class="text-brand-red border-b-2 border-brand-red pb-1 transition-colors focus-ring rounded" href="./index.html#buscador">PROPIEDADES</a>
+      <a class="hover:text-brand-red transition-colors focus-ring rounded" href="./index.html#servicios">SERVICIOS</a>
+      <a class="hover:text-brand-red transition-colors focus-ring rounded" href="./index.html#quienes-somos">QUIÉNES SOMOS</a>
+      <a class="hover:text-brand-red transition-colors focus-ring rounded" href="./contacto.html">CONTACTO</a>
+    </nav>
+    <div class="flex items-center gap-2 shrink-0">
+      <button type="button" data-open-login class="inline-flex items-center gap-2 border border-brand-navy hover:bg-brand-navy hover:text-white text-brand-navy px-3 sm:px-4 py-2 rounded-full font-bold text-[11px] sm:text-xs uppercase tracking-wider transition-all duration-200 shadow-sm focus-ring" aria-label="Ingresar al portal de demostración">
+        <span aria-hidden="true">👤</span><span class="hidden sm:inline">Ingresar</span>
+      </button>
+      <a class="inline-flex items-center gap-2 bg-brand-forest hover:bg-brand-forestHover text-white px-3 sm:px-5 py-2.5 rounded-full font-medium text-xs sm:text-sm transition-all duration-200 shadow-sm hover:shadow focus-ring" href="https://wa.me/5492477468005" rel="noopener noreferrer" target="_blank">WhatsApp</a>
+      <button id="mobile-menu-button" type="button" class="md:hidden border border-brand-navy text-brand-navy px-3 py-2 rounded-full text-xs font-bold focus-ring" aria-controls="mobile-menu" aria-expanded="false">MENÚ</button>
+    </div>
+  </div>
+  <div id="mobile-menu" class="mobile-menu md:hidden border-t border-gray-100 bg-white px-4 py-3" hidden>
+    <nav class="grid gap-2 text-xs font-bold uppercase tracking-wider text-brand-navy" aria-label="Navegación móvil">
+      <a class="py-2 focus-ring rounded" href="./index.html#inicio">Inicio</a>
+      <a class="py-2 focus-ring rounded" href="./index.html#buscador">Propiedades</a>
+      <a class="py-2 focus-ring rounded" href="./index.html#servicios">Servicios</a>
+      <a class="py-2 focus-ring rounded" href="./index.html#quienes-somos">Quiénes somos</a>
+      <a class="py-2 focus-ring rounded" href="./contacto.html">Contacto</a>
+      <button type="button" data-open-login class="text-left py-2 focus-ring rounded">Ingresar</button>
+    </nav>
+  </div>
+</header><main>
+<section class="py-14 bg-white" data-purpose="search-results-page" id="resultados-busqueda" tabindex="-1" aria-labelledby="resultados-title">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-wider text-brand-red mb-2">Resultados de búsqueda</p>
+        <h1 id="resultados-title" class="text-xl sm:text-2xl font-extrabold uppercase tracking-wide text-brand-navy">Propiedades encontradas</h1>
+      </div>
+      <p id="search-results-count" class="text-xs font-semibold text-brand-textMuted" aria-live="polite">Calculando resultados de muestra.</p>
+    </div>
+    <p id="search-results-status" class="empty-state mb-6 rounded-lg bg-brand-grayLight p-4 text-sm font-semibold text-brand-navy">Cargando propiedades de muestra según los filtros enviados.</p>
+    <div id="search-results-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    <div class="mt-5 flex flex-wrap items-center gap-3">
+      <a class="inline-flex bg-brand-red hover:bg-brand-redHover text-white px-5 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider focus-ring" href="./index.html#buscador">Volver al buscador</a>
+      <a class="inline-flex bg-brand-forest hover:bg-brand-forestHover text-white px-5 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider focus-ring" href="https://wa.me/5492477468005" rel="noopener noreferrer" target="_blank">Consultar por WhatsApp</a>
+    </div>
+  </div>
+</section>
+</main>
+<div id="login-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 p-4" role="dialog" aria-modal="true" aria-labelledby="login-title"><div class="fixed inset-0" data-backdrop></div><div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden z-10"><div class="bg-brand-navy px-6 py-5 flex items-center justify-between text-white"><div><h3 id="login-title" class="text-sm font-bold tracking-wide uppercase">Portal Grupo Rossello</h3><p class="text-[11px] text-gray-300">Versión de demostración: no se envían credenciales</p></div><button type="button" data-modal-close class="text-gray-300 hover:text-white rounded-lg p-1 hover:bg-white/10 transition-colors focus-ring" aria-label="Cerrar ventana">×</button></div><div class="p-6 sm:p-8"><p class="text-xs text-brand-textMuted mb-4">Este acceso ilustra el diseño del portal. No autentica usuarios, no guarda contraseñas y no transmite datos.</p><form id="demo-login-form" class="space-y-4"><div><label class="block text-xs font-bold text-brand-navy mb-1.5 uppercase tracking-wide" for="demo-user">Correo electrónico</label><input id="demo-user" type="text" placeholder="nombre@ejemplo.com" class="w-full text-xs font-medium bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2.5 text-brand-navy focus:ring-2 focus:ring-brand-red"></div><div><label class="block text-xs font-bold text-brand-navy mb-1.5 uppercase tracking-wide" for="demo-password">Contraseña</label><input id="demo-password" type="password" placeholder="••••••••" class="w-full text-xs font-medium bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2.5 text-brand-navy focus:ring-2 focus:ring-brand-red"></div><button type="submit" class="w-full py-3 bg-brand-red hover:bg-brand-redHover text-white font-bold text-xs uppercase tracking-wider rounded-lg shadow-sm transition-colors duration-200 focus-ring">VER MENSAJE DE PRUEBA</button></form><p id="login-demo-message" class="mt-4 text-xs font-semibold text-brand-forest" aria-live="polite"></p></div></div></div>
+<div id="property-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 p-4" role="dialog" aria-modal="true" aria-labelledby="detail-title"><div class="fixed inset-0" data-backdrop></div><div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden z-10"><button type="button" data-modal-close class="absolute right-3 top-3 z-10 bg-white/90 rounded-full px-3 py-1 text-brand-navy focus-ring" aria-label="Cerrar detalle">×</button><img data-detail-image alt="" class="h-64 w-full object-cover" src="./assets/images/property-dormida.jpg"><div class="p-6"><p class="text-xs font-bold uppercase tracking-wider text-brand-red mb-2">Ficha demostrativa</p><h3 id="detail-title" data-detail-title class="text-xl font-extrabold text-brand-navy"></h3><p data-detail-location class="text-sm text-brand-textMuted mt-1"></p><p data-detail-meta class="text-sm text-brand-textMuted mt-3"></p><p data-detail-price class="text-lg font-extrabold text-brand-navy mt-3"></p><p class="text-xs text-brand-textMuted mt-4">Versión de demostración con datos de las tarjetas provistas. Consultá por WhatsApp para información real y actualizada.</p><a class="mt-5 inline-flex bg-brand-forest hover:bg-brand-forestHover text-white px-5 py-2.5 rounded-full font-medium text-sm focus-ring" href="https://wa.me/5492477468005" rel="noopener noreferrer" target="_blank">Consultar por WhatsApp</a></div></div></div>
+<footer class="bg-brand-navy text-white text-xs pt-16 pb-12 border-t border-brand-navyDark" data-purpose="footer-section"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10"><div class="space-y-4"><div class="bg-white px-3 py-2 rounded-lg inline-block shadow-sm"><img alt="Grupo Rossello Inmobiliaria" class="h-11 w-auto object-contain block" src="./assets/brand/logo-rossello.png"></div><p class="text-[11px] text-gray-300 leading-relaxed">Hacemos de cada operación inmobiliaria una experiencia simple, segura y transparente.</p></div><div><h4 class="font-bold uppercase tracking-wider mb-3">ENLACES RÁPIDOS</h4><ul class="space-y-2 text-gray-300 text-[11px]"><li><a class="hover:text-white" href="./index.html#inicio">Inicio</a></li><li><a class="hover:text-white" href="./index.html#buscador">Propiedades</a></li><li><a class="hover:text-white" href="./index.html#servicios">Servicios</a></li><li><a class="hover:text-white" href="./index.html#quienes-somos">Quiénes somos</a></li><li><button type="button" data-open-login class="hover:text-white">Acceso de clientes</button></li></ul></div><div><h4 class="font-bold uppercase tracking-wider mb-3">TIPOS DE PROPIEDADES</h4><ul class="space-y-2 text-gray-300 text-[11px]"><li><a href="./index.html#buscador">Casas</a></li><li><a href="./index.html#buscador">Departamentos</a></li><li><a href="./index.html#buscador">Campos y Quintas</a></li><li><a href="./index.html#buscador">Terrenos</a></li><li><a href="./index.html#buscador">Remates</a></li></ul></div><div><h4 class="font-bold uppercase tracking-wider mb-3">CONTACTO</h4><ul class="space-y-2 text-gray-300 text-[11px]"><li>Av. Juan B. Justo 1619, Pergamino, Buenos Aires</li><li>2477 415383 / 417172</li><li>+54 9 2477 468005</li><li>cristianrossello@live.com.ar</li><li>Lun a Vie: 9 a 15 hs | Sáb: 9 a 13 hs</li></ul></div><div><h4 class="font-bold uppercase tracking-wider mb-3">MATRÍCULA</h4><p class="text-[11px] text-gray-300 font-semibold mb-1">Martillero y Corredor Público</p><p class="text-xs text-white font-bold mb-3">Cristian Rossello</p><p class="text-[10px] text-gray-300 font-mono tracking-wider">MAT. 187 - F° 36 - T° 1 CMP</p></div></div><div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-gray-300 gap-4"><div>© 2025 Grupo Rossello Inmobiliaria. Versión de demostración.</div><div class="flex items-center gap-4"><a class="hover:text-white" href="./contacto.html">Política de privacidad: demostración sin documento legal</a><span>|</span><a class="hover:text-white" href="./contacto.html">Términos: demostración sin documento legal</a></div></div></div></footer><script type="module" src="./src/main.js"></script>
+</body>
+</html>

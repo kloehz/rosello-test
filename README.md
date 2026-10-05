@@ -11,6 +11,8 @@ Demo interactivo de la landing provista para Grupo Rossello Inmobiliaria. Mantie
 
 ## Qué incluye
 
+- Buscador estático que navega a `resultados.html` con filtros por query string.
+- Página `contacto.html` independiente con WhatsApp, email y datos de atención.
 - Filtros demostrativos sobre las cinco propiedades de muestra originales.
 - Imágenes remotas descargadas a `assets/images/` para uso estático.
 - Logo renderizado desde `logos, colores y tipografia.pdf` con PDFKit/AppKit.

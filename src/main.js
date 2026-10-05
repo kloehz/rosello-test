@@ -44,12 +44,40 @@ function matches(property, filters) {
     && locationOk && bedsOk && priceOk;
 }
 
+function normalizeFilters(filters = {}) {
+  return {
+    operation: filters.operation || 'Todas',
+    type: filters.type || 'Todas',
+    location: filters.location || 'Todas',
+    beds: filters.beds || 'Todos',
+    price: filters.price || 'Indiferente'
+  };
+}
+
 function getFilters(form) {
-  return Object.fromEntries(new FormData(form).entries());
+  return normalizeFilters(Object.fromEntries(new FormData(form).entries()));
+}
+
+function getFiltersFromSearchParams(searchParams) {
+  return normalizeFilters(Object.fromEntries(searchParams.entries()));
 }
 
 function getSearchResults(form) {
   return properties.filter((property) => matches(property, getFilters(form)));
+}
+
+function getResultsForFilters(filters) {
+  const normalized = normalizeFilters(filters);
+  return properties.filter((property) => matches(property, normalized));
+}
+
+function buildResultsUrl(form) {
+  const params = new URLSearchParams();
+  Object.entries(getFilters(form)).forEach(([key, value]) => {
+    if (!value) return;
+    params.set(key, value);
+  });
+  return `./resultados.html?${params.toString()}`;
 }
 
 function assignClass(element, className) {
@@ -102,7 +130,7 @@ function createResultCard(property) {
   return article;
 }
 
-function renderSearchResults(results, { searched = true } = {}) {
+function renderSearchResults(results, { searched = true, scroll = false } = {}) {
   const section = document.getElementById('resultados-busqueda');
   const list = document.getElementById('search-results-list');
   const status = document.getElementById('search-results-status');
@@ -117,20 +145,29 @@ function renderSearchResults(results, { searched = true } = {}) {
   }
 
   if (!results.length) {
-    status.textContent = 'No hay propiedades de muestra para esos filtros. Probá limpiar la búsqueda.';
+    status.textContent = 'No hay propiedades de muestra para esos filtros. Volvé al buscador y probá limpiar la búsqueda.';
     count.textContent = '0 resultados';
   } else {
     status.textContent = `Encontramos ${results.length} propiedad${results.length === 1 ? '' : 'es'} de muestra para tu búsqueda.`;
     count.textContent = `${results.length} resultado${results.length === 1 ? '' : 's'}`;
     results.forEach((property) => list.append(createResultCard(property)));
   }
-  section.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
-  section.focus({ preventScroll: true });
+  if (scroll) {
+    section.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
+    section.focus({ preventScroll: true });
+  }
   return results.map((property) => property.id);
 }
 
 function clearSearchResults() {
   return renderSearchResults([], { searched: false });
+}
+
+function renderResultsPage() {
+  const section = document.getElementById('resultados-busqueda');
+  if (!section) return [];
+  const filters = getFiltersFromSearchParams(new URLSearchParams(window.location.search));
+  return renderSearchResults(getResultsForFilters(filters), { searched: true });
 }
 
 function openDialog(dialog, trigger) {
@@ -237,8 +274,17 @@ function prefersReducedMotion() { return window.matchMedia('(prefers-reduced-mot
 
 function setup() {
   const searchForm = document.getElementById('search-form');
-  searchForm?.addEventListener('submit', (event) => { event.preventDefault(); renderSearchResults(getSearchResults(searchForm)); });
-  document.getElementById('reset-search')?.addEventListener('click', () => { searchForm.reset(); clearSearchResults(); updateCarousel(); });
+  searchForm?.addEventListener('submit', (event) => {
+    if (!document.getElementById('search-results-list')) return;
+    event.preventDefault();
+    renderSearchResults(getSearchResults(searchForm), { scroll: true });
+  });
+  document.getElementById('reset-search')?.addEventListener('click', () => {
+    searchForm.reset();
+    clearSearchResults();
+    updateCarousel();
+  });
+  renderResultsPage();
 
   document.querySelectorAll('[data-detail-for]').forEach((button, index) => {
     button.id ||= `detail-button-${index}`;
@@ -280,4 +326,4 @@ function setup() {
 if (typeof document !== 'undefined') {
   document.addEventListener('DOMContentLoaded', setup);
 }
-export { properties, matches, getCarouselPageModel, WHATSAPP_ICON_PATH };
+export { properties, matches, getCarouselPageModel, WHATSAPP_ICON_PATH, buildResultsUrl, getFiltersFromSearchParams, getResultsForFilters };
