@@ -1,9 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { properties, matches } from '../src/main.js';
+import { properties, matches, getCarouselPageModel, WHATSAPP_ICON_PATH } from '../src/main.js';
 
 const html = readFileSync('index.html', 'utf8');
+const mainJs = readFileSync('src/main.js', 'utf8');
 
 test('filter metadata matches original sample cards', () => {
   assert.equal(properties.length, 5);
@@ -15,6 +16,37 @@ test('filter metadata matches original sample cards', () => {
     properties.filter((property) => matches(property, { operation: 'Alquiler', type: 'Todas', location: 'Todas', beds: 'Todos', price: 'Indiferente' })).map((property) => property.id),
     []
   );
+});
+
+test('search renders into its own results section without hiding featured cards', () => {
+  assert.ok(html.includes('id="resultados-busqueda"'));
+  assert.ok(html.includes('id="search-results-list"'));
+  assert.ok(html.includes('Usá el buscador para ver propiedades de muestra.'));
+  assert.equal(mainJs.includes('card.hidden'), false);
+  assert.equal(mainJs.includes('setVisibleCards'), false);
+});
+
+test('carousel pagination is page-based instead of one dot per card when multiple cards are visible', () => {
+  assert.deepEqual(getCarouselPageModel(5, 4), [0, 4]);
+  assert.deepEqual(getCarouselPageModel(5, 2), [0, 2, 4]);
+  assert.ok(getCarouselPageModel(properties.length, 4).length < properties.length);
+});
+
+
+test('contact has a prominent same-page section before the footer', () => {
+  assert.ok(html.includes('data-purpose="contact-section" id="contacto"'));
+  assert.ok(html.includes('Hablemos de tu próxima operación'));
+  assert.ok(html.indexOf('id="contacto"') < html.indexOf('data-purpose="footer-section"'));
+  assert.equal(/<footer[^>]*id="contacto"/.test(html), false);
+});
+
+test('WhatsApp property actions use inline icons instead of raw W labels', () => {
+  assert.equal(/>W<\/a>/.test(html), false);
+  assert.equal(/>W<\/a>/.test(mainJs), false);
+  assert.ok(html.includes('<svg aria-hidden="true" viewBox="0 0 32 32"'));
+  assert.ok(WHATSAPP_ICON_PATH.includes('M16.03 4'));
+  assert.ok(mainJs.includes('createElementNS'));
+  assert.equal(mainJs.includes('innerHTML'), false);
 });
 
 test('document has no duplicate ids and all hash links target existing ids', () => {
